@@ -3,32 +3,29 @@ from Teacher import Teacher
 from Teach import teach
 from Form import form
 from Classroom import classroom
-from Genetic_algorithm_2 import genetical_sort2
 from Heuristics import heuristic
-import collections
 import time
 
+PA=Subject(Subject_name="Projeto Aplicado",period_number=2, specialty_required=False)
+ISI=Subject(Subject_name="Integração de Sistemas de Informação",period_number=2, specialty_required=False)
 
-Maths=Subject(Subject_name="Mathematics",period_number=5)
-Add_Maths=Subject(Subject_name="Additional Mathematics",period_number=5)
+IA=Subject(Subject_name="Inteligência Artificial",period_number=2)
+SETR=Subject(Subject_name="Sistemas Embebidos e de Tempo Real",period_number=2)
+PDM=Subject(Subject_name="Programação de Dispositivos Móveis",period_number=2)
+AMS=Subject(Subject_name="Análise e Modelação de Software",period_number=2)
 
-Science=Subject(Subject_name="Science",period_number=5)
-Biology=Subject(Subject_name="Biology",period_number=4)
-Chemistry=Subject(Subject_name="Chemistry",period_number=4)
-Physics=Subject(Subject_name="Physics",period_number=4)
+AAD=Subject(Subject_name="Armazenamento e Acesso a Dados",period_number=2)
+POO=Subject(Subject_name="Programação Orientada a Objetos",period_number=2)
+PES=Subject(Subject_name="Projeto de Engenharia de Software",period_number=2)
 
-English=Subject(Subject_name="English",period_number=5)
-Malay=Subject(Subject_name="Malay",period_number=5)
-Chinese=Subject(Subject_name="Chinese",period_number=5)
+FF=Subject(Subject_name="Fundamentos de Física",period_number=4)
+PI=Subject(Subject_name="Programação Imperativa",period_number=4,side2=False)
+Geografi=Subject(Subject_name="Geografi",period_number=4)
+KH=Subject(Subject_name="Kemahiran Hidup",period_number=4,specialty_required=False)
+Pendidikan_Seni=Subject(Subject_name="Pendidikan Seni",period_number=4,specialty_required=False)
 
-Moral=Subject(Subject_name="Moral",period_number=3)
-Sejarah=Subject(Subject_name="Sejarah",period_number=3,side2=False)
-Geografi=Subject(Subject_name="Geografi",period_number=3)
-KH=Subject(Subject_name="Kemahiran Hidup",period_number=3,specialty_required=False)
-Pendidikan_Seni=Subject(Subject_name="Pendidikan Seni",period_number=3,specialty_required=False)
-
-PJK_lower=Subject(Subject_name="PJK_lower",period_number=3, morning=True,specialty_required=False)
-PJK_upper=Subject(Subject_name="PJK_upper",period_number=2, morning=True,specialty_required=False)
+PJK_lower=Subject(Subject_name="PJK_lower",period_number=4, specialty_required=False)
+PJK_upper=Subject(Subject_name="PJK_upper",period_number=4, specialty_required=False)
 
 Lower_form_subject=[Maths,Science,English,Malay,Chinese,Moral,Sejarah,Geografi,KH, Pendidikan_Seni,PJK_lower]
 Upper_form_subject=[Maths,Add_Maths,English,Malay,Chinese,Moral,Sejarah,PJK_upper,Biology,Chemistry,Physics]
@@ -94,13 +91,6 @@ Malay_teacher_C=Teacher(subject=Malay,teacher_name="Malay_teacher_C")
 English_teacher_A=Teacher(subject=English,teacher_name="English_teacher_A")
 English_teacher_B=Teacher(subject=English,teacher_name="English_teacher_B")
 English_teacher_C=Teacher(subject=English,teacher_name="English_teacher_C")
-
-
-genetic_instance=genetical_sort2(class_instances=classroom.instances,subject_instances=Subject.instances,teacher_instances=Teacher.instances,teach_instances=teach.instance)
-time0=time.perf_counter()
-print(genetic_instance.main())
-time1=time.perf_counter()
-print("The genetic_sort sort take {} seconds".format(time1-time0))
 
 
 heauristic_instance=heuristic(class_instances=classroom.instances,subject_instances=Subject.instances,teacher_instances=Teacher.instances,teach_instances=teach.instance)
