@@ -13,8 +13,8 @@ class classroom(form):
         self.schedule = []
         for day, period_num in enumerate(self.period_num):
             self.schedule.append([0 for y in range(period_num)])
-            self.schedule[day][self.Recess_period] = "Recess period"
-        self.schedule[self.assembly[0]][self.assembly[1]] = "Assembly"
+            self.schedule[day][self.Recess_period+1] = "Recess period"
+        #self.schedule[self.assembly[0]][self.assembly[1]] = "Assembly"
 
 
 

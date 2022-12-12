@@ -6,31 +6,31 @@ from Classroom import classroom
 from Heuristics import heuristic
 import time
 
-PA=Subject(Subject_name="Projeto Aplicado",period_number=4, specialty_required=True)
-ISI=Subject(Subject_name="Integração de Sistemas de Informação",period_number=4, specialty_required=True)
+PA=Subject(Subject_name="Projeto Aplicado",period_number=2, specialty_required=True)
+ISI=Subject(Subject_name="Integração de Sistemas de Informação",period_number=2, specialty_required=True)
 
-IA=Subject(Subject_name="Inteligência Artificial",period_number=4, specialty_required=True)
-SETR=Subject(Subject_name="Sistemas Embebidos e de Tempo Real",period_number=4, specialty_required=True)
-PDM=Subject(Subject_name="Programação de Dispositivos Móveis",period_number=4, specialty_required=True)
-AMS=Subject(Subject_name="Análise e Modelação de Software",period_number=4, specialty_required=True)
+IA=Subject(Subject_name="Inteligência Artificial",period_number=2, specialty_required=True)
+SETR=Subject(Subject_name="Sistemas Embebidos e de Tempo Real",period_number=2, specialty_required=True)
+PDM=Subject(Subject_name="Programação de Dispositivos Móveis",period_number=2, specialty_required=True)
+AMS=Subject(Subject_name="Análise e Modelação de Software",period_number=2, specialty_required=True)
 
-AAD=Subject(Subject_name="Armazenamento e Acesso a Dados",period_number=4, specialty_required=True)
-POO=Subject(Subject_name="Programação Orientada a Objetos",period_number=4, specialty_required=True)
-PES=Subject(Subject_name="Projeto de Engenharia de Software",period_number=4, specialty_required=True)
+AAD=Subject(Subject_name="Armazenamento e Acesso a Dados",period_number=2, specialty_required=True)
+POO=Subject(Subject_name="Programação Orientada a Objetos",period_number=2, specialty_required=True)
+PES=Subject(Subject_name="Projeto de Engenharia de Software",period_number=2, specialty_required=True)
 
-FF=Subject(Subject_name="Fundamentos de Física",period_number=4, specialty_required=True)
-PI=Subject(Subject_name="Programação Imperativa",period_number=4,side2=False, specialty_required=True)
-LI=Subject(Subject_name="Laboratórios de Informática",period_number=4,side2=False, specialty_required=True)
-CAL=Subject(Subject_name="Cálculo",period_number=4, specialty_required=True)
-AL=Subject(Subject_name="Álgebra Linear",period_number=4, specialty_required=True)
+FF=Subject(Subject_name="Fundamentos de Física",period_number=2, specialty_required=True)
+PI=Subject(Subject_name="Programação Imperativa",period_number=2,side2=False, specialty_required=True)
+LI=Subject(Subject_name="Laboratórios de Informática",period_number=2,side2=False, specialty_required=True)
+CAL=Subject(Subject_name="Cálculo",period_number=2, specialty_required=True)
+AL=Subject(Subject_name="Álgebra Linear",period_number=2, specialty_required=True)
 
-RC=Subject(Subject_name="Redes de Computadores",period_number=4, specialty_required=True)
+RC=Subject(Subject_name="Redes de Computadores",period_number=2, specialty_required=True)
 
 First_year=[PI,LI,CAL,AL,RC]
 Second_year=[AMS,AAD,POO,PES,FF]
 Third_year=[PA,ISI,IA,SETR,PDM]
 
-Form_1=form(Recess_period=1,max_sub_pd=2,period_num=[10,10,10,10,10])
+Form_1=form(Recess_period=1,max_sub_pd=2,period_num=[7,7,7,7,7])
 Form_2=form(Recess_period=1,max_sub_pd=2,period_num=[10,10,10,10,10])
 Form_3=form(Recess_period=1,max_sub_pd=2,period_num=[10,10,10,10,10])
 
