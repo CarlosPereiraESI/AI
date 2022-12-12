@@ -225,7 +225,6 @@ class heuristic():
         length=0
         for i in classs.schedule[coordinate[0]][period_num:]:
 
-
             if isinstance(i,str):
                 return length
             length += 1
@@ -310,7 +309,7 @@ class heuristic():
             classs.schedule[blank_coordinate[0]][blank_coordinate[1]].day=blank_coordinate[0]
             classs.schedule[blank_coordinate[0]][blank_coordinate[1]+i].period=blank_coordinate[1]+i
 
-        ## Assign blanks to the swap coordinate
+        ## Assign blanks to the swap coordinat-e
         classs.schedule[swap_coordinate[0]][swap_coordinate[1]:swap_coordinate[1]+number_of_period]=[0]*number_of_period
 
     ## consecutive_number parameter to identify coordinate that requires the blank period coordinate to be side by side towards each other
