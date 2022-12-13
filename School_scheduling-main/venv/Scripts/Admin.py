@@ -19,8 +19,8 @@ POO=Subject(Subject_name="Programação Orientada a Objetos",period_number=2, sp
 PES=Subject(Subject_name="Projeto de Engenharia de Software",period_number=2, specialty_required=True)
 
 FF=Subject(Subject_name="Fundamentos de Física",period_number=2, specialty_required=True)
-PI=Subject(Subject_name="Programação Imperativa",period_number=2,side2=False, specialty_required=True)
-LI=Subject(Subject_name="Laboratórios de Informática",period_number=2,side2=False, specialty_required=True)
+PI=Subject(Subject_name="Programação Imperativa",period_number=2, specialty_required=True)
+LI=Subject(Subject_name="Laboratórios de Informática",period_number=2, specialty_required=True)
 CAL=Subject(Subject_name="Cálculo",period_number=2, specialty_required=True)
 AL=Subject(Subject_name="Álgebra Linear",period_number=2, specialty_required=True)
 
@@ -30,9 +30,9 @@ First_year=[PI,LI,CAL,AL,RC]
 Second_year=[AMS,AAD,POO,PES,FF]
 Third_year=[PA,ISI,IA,SETR,PDM]
 
-Form_1=form(Recess_period=1,max_sub_pd=2,period_num=[7,7,7,7,7])
-Form_2=form(Recess_period=1,max_sub_pd=2,period_num=[10,10,10,10,10])
-Form_3=form(Recess_period=1,max_sub_pd=2,period_num=[10,10,10,10,10])
+Form_1=form(Recess_period=1,max_sub_pd=2,period_num=[5,5,5,5,5])
+Form_2=form(Recess_period=1,max_sub_pd=2,period_num=[5,5,5,5,5])
+Form_3=form(Recess_period=1,max_sub_pd=2,period_num=[5,5,5,5,5])
 
 
 Form_1.add_subject(First_year)
