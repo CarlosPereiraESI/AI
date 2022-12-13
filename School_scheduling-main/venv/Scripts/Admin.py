@@ -75,7 +75,8 @@ AL_teacher_A=Teacher(subject=AL,teacher_name="Teresa Abreu")
 
 RC_teacher_A=Teacher(subject=RC,teacher_name="Paulo Macedo")
 
-heauristic_instance=heuristic(class_instances=classroom.instances,subject_instances=Subject.instances,teacher_instances=Teacher.instances,teach_instances=teach.instance)
+heauristic_instance=heuristic(class_instances=classroom.instances,subject_instances=Subject.instances,
+teacher_instances=Teacher.instances,teach_instances=teach.instance)
 heauristic_instance.teacher_sufficient()
 
 time0=time.perf_counter()
