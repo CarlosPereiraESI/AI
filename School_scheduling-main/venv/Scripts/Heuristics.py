@@ -14,6 +14,9 @@ class heuristic():
         self.teacher_instance=copy.deepcopy(teacher_instances)
         self.teacher_dict=dict([i.teacher_name,i] for i in self.teacher_instance) ## Dict type to quicken teacher object access
 
+        # self.room_instance=copy.deepcopy(room_instances)
+        # self.room_dict=dict([i.room_name,i] for i in self.room_instance) ## Dict type to quicken teacher object access
+
         self.tach_instance=copy.deepcopy(teach_instances)
 
     def teacher_assignment(self):
@@ -72,17 +75,6 @@ class heuristic():
         if not len(Lack_teacher_list) == 0:
             print("The following subjects still lacks hours {}".format(Lack_teacher_list))
 
-        Non_specialty_hours_available = sum(v for k, v in Specialty_Subject_dict.items() if v >= 0)
-
-        if Non_specialty_hours_available > Non_Specialty_Subject_hours:
-            print(
-                "There is sufficient Non-specialty hours. There are still {} hours available while there is only {} hours required".format(
-                    Non_specialty_hours_available, Non_Specialty_Subject_hours))
-        else:
-            print(
-                "There is not sufficient Non-specialty hours. There are still {} hours available while there is only {} hours required".format(
-                    Non_specialty_hours_available, Non_Specialty_Subject_hours))
-
     def print_teacher_assigned(self):
         for classes in self.class_instance:
             print(classes.class_name)
@@ -94,29 +86,16 @@ class heuristic():
     def random_sort(self):
 
         ## Classes are assigned based on the sequence of
-        ## 1) Mandatory to be in the morning
-        ## 2) Requires 2 consecutive periods
-        ## 3) Assign single period classes
+        ## 1) Requires 2 consecutive periods
+        ## 2) Assign single period classes
         ## In order to reduce the need to swap blanks at the end as period space requirement is needed.
-
-        for classes in self.class_instance:
-            for every_subject,teach_val in classes.subjects.items():
-                subject_chosen_object=self.subject_dict[every_subject]
-                if subject_chosen_object.morning_class==True:
-
-                    while classes.subjects[every_subject][0]>1:
-
-                        ## select only morning classes with double period as physical classes can only be performed with double period
-                        day_coordinate,period_coordinate=random.choice(self.day_period_set(classs=classes,subject_name=every_subject,number_of_period=2,morning=True))
-                        self.class_assignment(classs=classes, day_num=day_coordinate, period_num=period_coordinate,
-                                                  subject=every_subject, total_period=2)
 
         for classes in self.class_instance:
             for every_subject, teach_val in classes.subjects.items():
 
-                subject_chosen_object=self.subject_dict[every_subject]
+                #subject_chosen_object=self.subject_dict[every_subject]
 
-                if subject_chosen_object.side_by_side==True:
+                if self.subject_dict[every_subject].side_by_side==True:
                     while classes.subjects[every_subject][0] > 1:
 
                         ## Select classes that need to be side by side to each other
