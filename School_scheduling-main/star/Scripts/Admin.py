@@ -102,10 +102,10 @@ print("13 - Cálculo")
 print("14 - Álgebra Linear ")
 print("15 -Redes de Computadores \n")
 
-#start = heauristic_instance
+start = (0,0)
 end = (7, 6)
 
-path = astar(schedule, schedule, end)
+path = astar(schedule, start, end)
 print("The heuristic sort take {} seconds".format(time1-time0))
 
 heauristic_instance.print_schedule()

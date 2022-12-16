@@ -4,7 +4,7 @@ import random
 import math
 import numpy as np
 
-schedule = np.matrix([[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]])
+schedule = []
 
 class heuristic():
     def __init__(self,class_instances,subject_instances,teacher_instances,teach_instances):
@@ -309,9 +309,11 @@ class heuristic():
                 for period in day:
                     if isinstance(period,str) or isinstance(period,int):
                         print(period,end=", " )
-                        np.insert(schedule, period, axis=1)
+                        schedule.append(period)
                     else:
                         print(period.subject,end=", ")
-                        np.insert(schedule, period.subject, axis=1)
+                        schedule.append(period.subject)
+        
                 print("")
             print("")
+            
