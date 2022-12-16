@@ -4,12 +4,14 @@ import random
 import math
 import numpy as np
 
+schedule = np.matrix([[0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0]])
+
 class heuristic():
     def __init__(self,class_instances,subject_instances,teacher_instances,teach_instances):
         self.class_instance=copy.deepcopy(class_instances)
 
         self.subject_instance=copy.deepcopy(subject_instances)
-        self.subject_dict=dict([i.subject_name,i] for i in self.subject_instance) ## Dict type to quicken subject object access
+        self.subject_dict=dict([i.id, i] for i in self.subject_instance) ## Dict type to quicken subject object access
 
         self.teacher_instance=copy.deepcopy(teacher_instances)
         self.teacher_dict=dict([i.teacher_name,i] for i in self.teacher_instance) ## Dict type to quicken teacher object access
@@ -30,7 +32,7 @@ class heuristic():
 
                     ## Assign candidate teacher that have specialty knowledge in the subject and have sufficient teaching hours
                     candidate = [teachers for teachers in self.teacher_instance if
-                                           teachers.specialty_subject.subject_name == temp_sub.subject_name
+                                           teachers.specialty_subject.id == temp_sub.id
                                            and (teachers.assigned_hours + temp_sub.period_num) < teachers.max_hours_per_week]
                     self.assign_teacher(classs=every_classroom, candidate=candidate, subject=every_subject)
 
@@ -58,7 +60,7 @@ class heuristic():
         Non_Specialty_Subject_hours = 0
         for subject in self.subject_instance:
             if subject.specialty == True:
-                Specialty_Subject_dict[subject.subject_name] = 0
+                Specialty_Subject_dict[subject.id] = 0
 
         for classes in self.class_instance:
             for subject, val in classes.subjects.items():
@@ -69,7 +71,7 @@ class heuristic():
                     Non_Specialty_Subject_hours -= temp_sub.period_num
 
         for teacher in self.teacher_instance:
-            Specialty_Subject_dict[teacher.specialty_subject.subject_name] += teacher.max_hours_per_week
+            Specialty_Subject_dict[teacher.specialty_subject.id] += teacher.max_hours_per_week
 
         Lack_teacher_list = [(k, v) for k, v in Specialty_Subject_dict.items() if v < 0]
         if not len(Lack_teacher_list) == 0:
@@ -99,7 +101,7 @@ class heuristic():
                     while classes.subjects[every_subject][0] > 1:
 
                         ## Select classes that need to be side by side to each other
-                        period_options = self.day_period_set(classs=classes, subject_name=every_subject,number_of_period=2)
+                        period_options = self.day_period_set(classs=classes, id=every_subject,number_of_period=2)
                         day_coordinate,period_coordinate= random.choice(period_options)
 
                         self.class_assignment(classs=classes, day_num=day_coordinate, period_num=period_coordinate,
@@ -115,7 +117,7 @@ class heuristic():
                     while classes.subjects[every_subject][0] != 0:
 
                         ## Select coordinate for period that can be independent
-                        period_options=self.day_period_set(classs=classes, subject_name=every_subject, number_of_period=1)
+                        period_options=self.day_period_set(classs=classes, id=every_subject, number_of_period=1)
                         day_coordinate, period_coordinate = random.choice(period_options)
                         
                         self.class_assignment(classs=classes,day_num=day_coordinate,period_num=period_coordinate,subject=every_subject,total_period=1)
@@ -133,13 +135,13 @@ class heuristic():
             teacher_chosen_object.add_class(self.tach_instance[-1]) ## Allocate teacher with teach instance
             classs.subjects[subject][0] -= 1 ## Reduce hours remaining for the class' subject
 
-    def day_period_set(self,classs,subject_name, number_of_period,morning=False):   ## Function to identify periods that can be assigned to the subject
+    def day_period_set(self,classs,id, number_of_period,morning=False):   ## Function to identify periods that can be assigned to the subject
         empty=True
         while empty:
             day_period=[]
             for day_num,day in enumerate(classs.schedule):
 
-                ## A session is the number of period to teach for each class until the day end or recess period start. This is used to make consecutive periods select
+                ## A session is the number of period to teach for each class until the day end or-1start. This is used to make consecutive periods select
                 ## coordinates that are not odd.
                 session = self.session_length(classs,[day_num,0])
                 session_num = 0
@@ -148,10 +150,10 @@ class heuristic():
                 subjects_taught = [period.subject for period in day if isinstance(period, teach)]
 
                 ## Teacher assigned object for class given the subject parameter
-                teacher_chosen_object = self.teacher_dict[classs.subjects[subject_name][1]]
+                teacher_chosen_object = self.teacher_dict[classs.subjects[id][1]]
 
                 ## Proceed only if the subject parameter is not taught on that day
-                if not next((subject for subject in subjects_taught if subject == subject_name), False):
+                if not next((subject for subject in subjects_taught if subject == id), False):
 
                     for period_num,period in enumerate(day):
 
@@ -167,7 +169,7 @@ class heuristic():
                                 blank_coordinates.append([day_num, period_num + i])
 
                         ## Period cannot be recess, assembly or more than the possible last period of the day
-                        if period != "Recess period" and period != "Assembly" and period_num<=(len(day)-number_of_period):
+                        if period != -1 and period != "Assembly" and period_num<=(len(day)-number_of_period):
 
                             ## Teacher must be free in the period that will be assigned
                             if not any(x in teacher_chosen_object.teach_schedule() for x in blank_coordinates):
@@ -189,7 +191,7 @@ class heuristic():
             ## No period fulfill the requirements, swap the remaining blank period with already assigned classes
             if not day_period:
                 Available_blank_coordinate = random.choice(self.list_element_index(lis=classs.schedule, value=0, consecutive_number=number_of_period))
-                self.swap_blanks(classs=classs, subject_name=subject_name, blank_coordinate=Available_blank_coordinate, number_of_period=number_of_period)
+                self.swap_blanks(classs=classs, id=id, blank_coordinate=Available_blank_coordinate, number_of_period=number_of_period)
                 empty=True
             else:
                 empty=False
@@ -211,10 +213,10 @@ class heuristic():
         return length
 
     ## Select the given blank coordinate and swap it with periods that are already assigned classes
-    def swap_blanks(self,classs,subject_name, blank_coordinate,number_of_period):
+    def swap_blanks(self,classs,id, blank_coordinate,number_of_period):
         swap_coordinate = []
         subjects_taught_blank=[period.subject for period in classs.schedule[blank_coordinate[0]] if isinstance(period, teach)]
-        blank_teacher_object = self.teacher_dict[classs.subjects[subject_name][1]]
+        blank_teacher_object = self.teacher_dict[classs.subjects[id][1]]
 
         for day_num, day in enumerate(classs.schedule):
 
@@ -222,7 +224,7 @@ class heuristic():
 
             ## Check if subject is taught on that day, proceed if it is not taught on that day
 
-            if not next((subject for subject in subjects_taught if subject == subject_name), False):
+            if not next((subject for subject in subjects_taught if subject == id), False):
 
                 for period_num,period in enumerate(day):
                     if isinstance(period, teach):
@@ -243,8 +245,7 @@ class heuristic():
                             ## Check both the teacher of the period and blank period are not busy at that time
                             if not any(x in period_teacher_object.teach_schedule() for x in blank_coordinates) and not any(x in blank_teacher_object.teach_schedule() for x in selected_coordinates):
 
-                                ## If the previous period is assembly or recess period
-                                if isinstance(classs.schedule[day_num][period_num-1],str):
+                                ## If the previous period is assembly or-1                                if isinstance(classs.schedule[day_num][period_num-1],str):
                                     if not period_num==len(classs.schedule[day_num])-1: ## Check if not last period of the day
                                         if isinstance(classs.schedule[day_num][period_num+1],teach): ## Check if next period is already assigned a class.
                                             if classs.schedule[day_num][period_num+1].subject!=classs.schedule[day_num][period_num].subject:
@@ -254,30 +255,30 @@ class heuristic():
                                                     swap_coordinate.append([day_num,period_num]) ## Append coordinate if next period is same subject for double period
 
                                 ## If last period of the day and only swapping 1 period, append the coordinate
-                                elif period_num==len(day)-1:
-                                    if number_of_period==1:
-                                        if classs.schedule[day_num][period_num - 1].subject != classs.schedule[day_num][
-                                            period_num].subject:
-                                            swap_coordinate.append([day_num,period_num])
-
-                                ## If next period is Recess, append coordinate if the parameter period is single and the class before this is not the same subject
-                                elif isinstance(classs.schedule[day_num][period_num+1],str):
-                                    if number_of_period == 1:
-                                        if isinstance(classs.schedule[day_num][period_num-1],teach):
-                                            if classs.schedule[day_num][period_num-1].subject!=classs.schedule[day_num][period_num].subject:
+                                    elif period_num==len(day)-1:
+                                        if number_of_period==1:
+                                            if classs.schedule[day_num][period_num - 1].subject != classs.schedule[day_num][
+                                                period_num].subject:
                                                 swap_coordinate.append([day_num,period_num])
 
-                                else:
-                                    if isinstance(classs.schedule[day_num][period_num - 1], teach) and isinstance(classs.schedule[day_num][period_num + 1], teach):
-
-                                        ## If single period parameter, check if theere are no same subject after and before the coordinate, to only append single period
+                                    ## If next period is Recess, append coordinate if the parameter period is single and the class before this is not the same subject
+                                    elif isinstance(classs.schedule[day_num][period_num+1],str):
                                         if number_of_period == 1:
-                                            if classs.schedule[day_num][period_num-1].subject!=classs.schedule[day_num][period_num].subject and classs.schedule[day_num][period_num+1].subject!=classs.schedule[day_num][period_num].subject:
-                                                swap_coordinate.append([day_num,period_num])
-                                        ## If double period parameter, append swap coordinate only if next period is of the same subject
-                                        if number_of_period==2:
-                                            if classs.schedule[day_num][period_num+1].subject==classs.schedule[day_num][period_num].subject:
-                                                swap_coordinate.append([day_num, period_num])
+                                            if isinstance(classs.schedule[day_num][period_num-1],teach):
+                                                if classs.schedule[day_num][period_num-1].subject!=classs.schedule[day_num][period_num].subject:
+                                                    swap_coordinate.append([day_num,period_num])
+
+                                    else:
+                                        if isinstance(classs.schedule[day_num][period_num - 1], teach) and isinstance(classs.schedule[day_num][period_num + 1], teach):
+
+                                            ## If single period parameter, check if theere are no same subject after and before the coordinate, to only append single period
+                                            if number_of_period == 1:
+                                                if classs.schedule[day_num][period_num-1].subject!=classs.schedule[day_num][period_num].subject and classs.schedule[day_num][period_num+1].subject!=classs.schedule[day_num][period_num].subject:
+                                                    swap_coordinate.append([day_num,period_num])
+                                            ## If double period parameter, append swap coordinate only if next period is of the same subject
+                                            if number_of_period==2:
+                                                if classs.schedule[day_num][period_num+1].subject==classs.schedule[day_num][period_num].subject:
+                                                    swap_coordinate.append([day_num, period_num])
 
 
         swap_coordinate=random.choice(swap_coordinate)
@@ -308,7 +309,9 @@ class heuristic():
                 for period in day:
                     if isinstance(period,str) or isinstance(period,int):
                         print(period,end=", " )
+                        np.insert(schedule, period, axis=1)
                     else:
                         print(period.subject,end=", ")
+                        np.insert(schedule, period.subject, axis=1)
                 print("")
             print("")

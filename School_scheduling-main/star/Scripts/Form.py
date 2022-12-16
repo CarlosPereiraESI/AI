@@ -16,10 +16,10 @@ class form():
     def add_subject(self,subject):
         if isinstance(subject,list) and all(isinstance(x,Subject) for x in subject):
             for sub in subject:
-                self.subjects[sub.subject_name]=[sub.period_num]
+                self.subjects[sub.id]=[sub.period_num]
 
         elif isinstance(subject,Subject):
-            self.subjects[subject.subject_name]=[sub.period_num]
+            self.subjects[subject.id]=[sub.period_num]
         else:
             raise Exception("Invalid subject object")
 
