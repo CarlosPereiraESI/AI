@@ -6,6 +6,7 @@ from Classroom import classroom
 from Heuristics import heuristic, schedule
 import time
 from AStar import astar
+import numpy as np
 
 PA=Subject(Subject_name="Projeto Aplicado",id=1, period_number=2, specialty_required=True)
 ISI=Subject(Subject_name="Integração de Sistemas de Informação",id=2, period_number=2, specialty_required=True)
@@ -102,12 +103,28 @@ print("13 - Cálculo")
 print("14 - Álgebra Linear ")
 print("15 -Redes de Computadores \n")
 
-start = (0,0)
-end = (7, 6)
-
-path = astar(schedule, start, end)
-print("The heuristic sort take {} seconds".format(time1-time0))
-
 heauristic_instance.print_schedule()
-print(schedule)
+
+arr = np.reshape(schedule, (15, 5))       
+start = arr
+end = [[11,13,-1,0,0],
+    [14,12,-1,0,0],
+    [13,15,-1,0,0],
+    [12,14,-1,0,0],
+    [11,15,-1,0,0],
+    [6,8,-1,0,0],
+    [9,7,-1,0,0],
+    [10,6,-1,0,0],
+    [7,9,-1,0,0],
+    [8,10,-1,0,0],
+    [3,2,-1,0,0],
+    [5,1,-1,0,0],
+    [4,5,-1,0,0],
+    [2,1,-1,0,0],
+    [4,3,-1,0,0]]
+
+path = astar(arr, start, end)
+print(arr)
+print(path)
+print("The heuristic sort take {} seconds".format(time1-time0))
 

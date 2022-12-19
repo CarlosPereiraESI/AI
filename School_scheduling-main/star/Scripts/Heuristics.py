@@ -313,7 +313,5 @@ class heuristic():
                     else:
                         print(period.subject,end=", ")
                         schedule.append(period.subject)
-        
                 print("")
             print("")
-            
