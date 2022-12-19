@@ -10,7 +10,7 @@ class Node():
         self.f = 0
 
     def __eq__(self, other):
-        return self.position == other.position
+        return (self.position == other.position).any()
 
 
 def astar(schedule, start, end):
@@ -45,7 +45,7 @@ def astar(schedule, start, end):
         closed_list.append(current_node)
 
         # Found the goal
-        if current_node == end_node:
+        if (current_node == end_node).all():
             path = []
             current = current_node
             while current is not None:
@@ -61,12 +61,12 @@ def astar(schedule, start, end):
             node_position = (current_node.position[0] + new_position[0], current_node.position[1] + new_position[1])
 
             # Make sure within range
-            if node_position[0] > (len(schedule) - 1) or node_position[0] < 0 or node_position[1] > (len(schedule[len(schedule)-1]) -1) or node_position[1] < 0:
+            if (node_position[0] > (len(schedule) - 1)).all() or (node_position[0] < 0).all() or (node_position[1] > (len(schedule[len(schedule)-1]) -1)).all() or (node_position[1] < 0).all():
                 continue
 
             # Make sure walkable terrain
-            if schedule[node_position[0]][node_position[1]] != 0:
-                continue
+            #if schedule[node_position[0]][node_position[1]] != 0:
+             #   continue
 
             # Create new node
             new_node = Node(current_node, node_position)
@@ -89,7 +89,7 @@ def astar(schedule, start, end):
 
             # Child is already in the open list
             for open_node in open_list:
-                if child == open_node and child.g > open_node.g:
+                if (child == open_node) and (child.g > open_node.g):
                     continue
 
             # Add the child to the open list

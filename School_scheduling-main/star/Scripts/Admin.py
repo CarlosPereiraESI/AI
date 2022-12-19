@@ -124,7 +124,6 @@ end = [[11,13,-1,0,0],
     [4,3,-1,0,0]]
 
 path = astar(arr, start, end)
-print(arr)
 print(path)
 print("The heuristic sort take {} seconds".format(time1-time0))
 
