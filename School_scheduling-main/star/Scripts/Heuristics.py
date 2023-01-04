@@ -304,14 +304,9 @@ class heuristic():
 
     def print_schedule(self):
         for classs in self.class_instance:
-            print(classs.class_name)
             for day in classs.schedule:
                 for period in day:
                     if isinstance(period,str) or isinstance(period,int):
-                        print(period,end=", " )
                         schedule.append(period)
                     else:
-                        print(period.subject,end=", ")
                         schedule.append(period.subject)
-                print("")
-            print("")
