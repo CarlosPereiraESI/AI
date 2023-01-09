@@ -1,52 +1,5 @@
 from copy import copy
-
-days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-hours = ["8:00", "9:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"]
-subjects = ["Math", "Science", "English", "History", "Physical Education", "Art", "Music"]
-classes = ["Class A", "Class B", "Class C", "Class D"]
-teachers = ["Mr. Smith", "Ms. Johnson", "Mrs. Williams", "Mr. Brown", "Ms. Davis", 
-"Mrs. Rodriguez", "Mr. Patel", "Mrs. Lee", "Ms. Thompson"]
-classrooms = ["Room 101", "Room 102", "Room 103", "Room 104", 
-"Room 105", "Room 106", "Room 107", "Room 108", "Room 109"]
-
-# Define the start and goal states as dictionaries
-start_state = {"day": "Monday", "hour": "8:00", "subject": "Math", "class": "Class A", "classroom": "Room 101", "teacher": "Mr. Smith"}
-goal_state = {"day": "Friday", "hour": "16:00", "subject": "English", "class": "Class B", "classroom": "Room 109", "teacher": "Ms. Davis"}
-
-# Define the actions and their costs
-# actions = [
-#   {"name": "Move forward in time by one hour", "cost": 1},
-#   {"name": "Move backward in time by one hour", "cost": 2},
-#   {"name": "Move to next day of the week", "cost": 3},
-#   {"name": "Move to previous day of the week", "cost": 4},
-#   {"name": "Change subject", "cost": 5},
-#   {"name": "Change class", "cost": 6},
-#   {"name": "Change teacher", "cost": 7},
-#   {"name": "Change classroom", "cost": 8},
-# ]
-
-actions = [
-{"day": "Monday", "hour": "9:00", "subject": "Science", "class": "Class B", "classroom": "Room 102", "teacher": "Ms. Johnson", "cost": 2},
-{"day": "Monday", "hour": "10:00", "subject": "English", "class": "Class C", "classroom": "Room 103", "teacher": "Mrs. Williams", "cost": 1},
-{"day": "Monday", "hour": "11:00", "subject": "History", "class": "Class D", "classroom": "Room 104", "teacher": "Mr. Brown", "cost": 6},
-{"day": "Tuesday", "hour": "8:00", "subject": "Math", "class": "Class A", "classroom": "Room 101", "teacher": "Mr. Smith", "cost": 5},
-{"day": "Tuesday", "hour": "9:00", "subject": "Science", "class": "Class B", "classroom": "Room 102", "teacher": "Ms. Johnson", "cost": 3},
-{"day": "Tuesday", "hour": "10:00", "subject": "English", "class": "Class C", "classroom": "Room 103", "teacher": "Mrs. Williams", "cost": 4},
-{"day": "Tuesday", "hour": "11:00", "subject": "History", "class": "Class D", "classroom": "Room 104", "teacher": "Mr. Brown", "cost": 1},
-{"day": "Wednesday", "hour": "8:00", "subject": "Math", "class": "Class A", "classroom": "Room 101", "teacher": "Mr. Smith", "cost": 6},
-{"day": "Wednesday", "hour": "9:00", "subject": "Science", "class": "Class B", "classroom": "Room 102", "teacher": "Ms. Johnson", "cost": 7},
-{"day": "Wednesday", "hour": "10:00", "subject": "English", "class": "Class C", "classroom": "Room 103", "teacher": "Mrs. Williams", "cost": 2},
-{"day": "Wednesday", "hour": "11:00", "subject": "History", "class": "Class D", "classroom": "Room 104", "teacher": "Mr. Brown", "cost": 5},
-{"day": "Thursday", "hour": "8:00", "subject": "Math", "class": "Class A", "classroom": "Room 101", "teacher": "Mr. Smith", "cost": 4},
-{"day": "Thursday", "hour": "9:00", "subject": "Science", "class": "Class B", "classroom": "Room 102", "teacher": "Ms. Johnson", "cost": 6},
-{"day": "Thursday", "hour": "10:00", "subject": "English", "class": "Class C", "classroom": "Room 103", "teacher": "Mrs. Williams", "cost": 8},
-{"day": "Thursday", "hour": "11:00", "subject": "History", "class": "Class D", "classroom": "Room 104", "teacher": "Mr. Brown", "cost": 3},
-{"day": "Friday", "hour": "8:00", "subject": "Math", "class": "Class A", "classroom": "Room 101", "teacher": "Mr. Smith", "cost": 1},
-{"day": "Friday", "hour": "9:00", "subject": "Science", "class": "Class B", "classroom": "Room 102", "teacher": "Ms. Johnson", "cost": 8},
-{"day": "Friday", "hour": "10:00", "subject": "English", "class": "Class C", "classroom": "Room 103", "teacher": "Mrs. Williams", "cost": 2},
-{"day": "Friday", "hour": "11:00", "subject": "History", "class": "Class D", "classroom": "Room 104", "teacher": "Mr. Brown", "cost": 3},
-{"day": "Friday", "hour": "16:00", "subject": "English", "class": "Class B", "classroom": "Room 109", "teacher": "Ms. Davis", "cost": 20}
-]
+from data import *
 
 class AStar:
     def __init__(self, start_state, goal_state, actions, heuristic_cost):
@@ -63,13 +16,18 @@ class AStar:
             if key in new_state:
                 new_state[key] = action[key]
         return new_state
+
+    def is_goal_state(self, state):
+        if state in goal_states:
+            return True
+        return False
     
     def reconstruct_path(self, came_from, current_state):
         path = []
         path.append(current_state)
         while tuple(current_state.items()) in came_from:
             # Set the current state to its predecessor
-            print(current_state, came_from)
+            #print(current_state, came_from)
             current_state = came_from[tuple(current_state.items())]
             path.append(current_state)
         return path[::-1]
@@ -94,9 +52,8 @@ class AStar:
         # Find the state in the open set with the lowest f_score
             current_state = min(open_set, key=lambda s: f_score[tuple(s.items())])
             # If the current state is the goal state, return the path
-            if current_state == self.goal_state:
+            if self.is_goal_state(current_state):
                 return self.reconstruct_path(came_from, current_state)
-        
             # Remove the current state from the open set and add it to the closed set
             open_set.remove(current_state)
             closed_set.append(current_state)
@@ -124,13 +81,14 @@ class AStar:
         return []
 # Define the function to calculate the heuristic cost (estimated cost to reach the goal state)
 def heuristic_cost(state):
-  day_cost = abs(days_of_week.index(state["day"]) - days_of_week.index(goal_state["day"]))
-  hour_cost = abs(hours.index(state["hour"]) - hours.index(goal_state["hour"]))
-  subject_cost = abs(subjects.index(state["subject"]) - subjects.index(goal_state["subject"]))
-  class_cost = abs(classes.index(state["class"]) - classes.index(goal_state["class"]))
-  teacher_cost = abs(teachers.index(state["teacher"]) - teachers.index(goal_state["teacher"]))
-  classroom_cost = abs(classrooms.index(state["classroom"]) - classrooms.index(goal_state["classroom"]))
-  return day_cost + hour_cost + subject_cost + class_cost + teacher_cost + classroom_cost
+    for goal_state in goal_states:
+        day_cost = abs(days_of_week.index(state["day"]) - days_of_week.index(goal_state["day"]))
+        hour_cost = abs(hours.index(state["hour"]) - hours.index(goal_state["hour"]))
+        subject_cost = abs(subjects.index(state["subject"]) - subjects.index(goal_state["subject"]))
+        class_cost = abs(classes.index(state["class"]) - classes.index(goal_state["class"]))
+        teacher_cost = abs(teachers.index(state["teacher"]) - teachers.index(goal_state["teacher"]))
+        classroom_cost = abs(classrooms.index(state["classroom"]) - classrooms.index(goal_state["classroom"]))
+    return day_cost + hour_cost + subject_cost + class_cost + teacher_cost + classroom_cost
 
 
 states = []
@@ -142,7 +100,7 @@ for action in actions:
             modified_actions.append(action)
 
 # Initialize the A* algorithm
-a_star = AStar(start_state, goal_state, modified_actions, heuristic_cost)
+a_star = AStar(start_state, goal_states, modified_actions, heuristic_cost)
 
 # Find the optimal path to the goal state
 path = a_star.find_path()
