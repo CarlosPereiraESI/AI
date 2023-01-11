@@ -13,17 +13,53 @@ classrooms = ["Room T", "Room E", "Room C", "Room N", "Room IOT",
 # Define the start and goal states as dictionaries
 start_state = {"day": "Monday", "hour": "9-11", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room T", "teacher": "Joaquim Gonçalves"}
 
+
+# AP, AI, MP, SI, ES
+#
+#
+#
+#
+#
+#
+#
+#
 actions = [
 {"day": "Monday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 1},
-{"day": "Monday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 2},
-{"day": "Monday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 3},
-{"day": "Monday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 4},
-{"day": "Monday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 5},
-{"day": "Wednesday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 1},
-{"day": "Wednesday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 5},
-{"day": "Wednesday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 10},
-{"day": "Wednesday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Monday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 6},
+{"day": "Monday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 10},
+{"day": "Monday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Monday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 20},
+
+{"day": "Monday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 1},
+{"day": "Monday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 6},
+{"day": "Monday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 10},
+{"day": "Monday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Monday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 20},
+
+{"day": "Monday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room N", "teacher": "Patrícia Leite", "cost": 1},
+{"day": "Monday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room N", "teacher": "Patrícia Leite", "cost": 6},
+{"day": "Monday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room N", "teacher": "Patrícia Leite", "cost": 10},
+{"day": "Monday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room N", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Monday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room N", "teacher": "Patrícia Leite", "cost": 20},
+
+{"day": "Tuesday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 1},
+{"day": "Tuesday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 5},
+{"day": "Tuesday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 12},
+{"day": "Tuesday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Tuesday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 20},
+
+{"day": "Wednesday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 2},
+{"day": "Wednesday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 7},
+{"day": "Wednesday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Wednesday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 16},
 {"day": "Wednesday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 20},
+
+{"day": "Thusrday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 2},
+{"day": "Thusrday", "hour": "11-13", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 7},
+{"day": "Thusrday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 15},
+{"day": "Thusrday", "hour": "16-18", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 16},
+{"day": "Thusrday", "hour": "18-20", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite", "cost": 20},
+
 {"day": "Monday", "hour": "11-13", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room C", "teacher": "Joaquim Gonçalves", "cost": 5},
 {"day": "Monday", "hour": "14-16", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room C", "teacher": "Joaquim Gonçalves", "cost": 10},
 {"day": "Monday", "hour": "16-18", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room C", "teacher": "Joaquim Gonçalves", "cost": 15},
