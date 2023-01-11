@@ -246,8 +246,50 @@ actions = [
 ]
 
 goal_states = [
-    {"day": "Monday", "hour": "9-11", "subject": "Applied Project", "class": "LESI2", "classroom": "Room E", "teacher": "Patrícia Leite"},
-    {"day": "Friday", "hour": "11-13", "subject": "Mobile Programming", "class": "LESI3", "classroom": "Room C", "teacher": "Nuno Mendes"},
-    {"day": "Friday", "hour": "16-18", "subject": "Discrete Maths", "class": "LESI1", "classroom": "Room E", "teacher": "Teresa Abreu"}
-    ]
+    #1ano
+    {"day": "Monday", "hour": "9-11", "subject": "Calculus", "class": "LESI1", "classroom": "Room T", "teacher": "Natália Rego"},
+    {"day": "Monday", "hour": "11-13", "subject": "Informatics Labs", "class": "LESI1", "classroom": "Room Networking", "teacher": "Nuno Rodrigues"},
+    {"day": "Monday", "hour": "14-16", "subject": "Computers Architecture", "class": "LESI1", "classroom": "Room Electronics", "teacher": "Sandro Carvalho"},
 
+    {"day": "Tuesday", "hour": "9-11", "subject": "Applied Project", "class": "LESI1", "classroom": "Room E", "teacher": "Patrícia Leite"},
+    {"day": "Tuesday", "hour": "11-13", "subject": "Mobile Programming", "class": "LESI1", "classroom": "Room C", "teacher": "Nuno Mendes"},
+    
+    {"day": "Thursday", "hour": "9-11", "subject": "Discrete Maths", "class": "LESI1", "classroom": "Room N", "teacher": "Teresa Abreu"},
+    {"day": "Thursday", "hour": "11-13", "subject": "Imperative Programming", "class": "LESI1", "classroom": "Room E", "teacher": "Óscar Ribeiro"},
+    {"day": "Thursday", "hour": "14-16", "subject": "Calculus", "class": "LESI1", "classroom": "Room E", "teacher": "Natália Rego"},
+
+    {"day": "Friday", "hour": "9-11", "subject": "Computers Architecture", "class": "LESI1", "classroom": "Room E", "teacher": "Sandro Carvalho"},
+    {"day": "Friday", "hour": "11-13", "subject": "Informatics Labs", "class": "LESI1", "classroom": "Room C", "teacher": "Nuno Rodrigues"},
+    
+
+    #2ano
+    {"day": "Tuesday", "hour": "9-11", "subject": "Object-Oriented Programming", "class": "LESI2", "classroom": "Room T", "teacher": "Luís Ferreira"},
+    {"day": "Tuesday", "hour": "11-13", "subject": "Statistics", "class": "LESI2", "classroom": "Room E", "teacher": "Andreia Monteiro"},
+    {"day": "Tuesday", "hour": "14-16", "subject": "Physics", "class": "LESI2", "classroom": "Room IOT", "teacher": "Daniel Miranda"},
+
+    {"day": "Wednesday", "hour": "9-11", "subject": "Data Storage", "class": "LESI2", "classroom": "Room T", "teacher": "Paulo Teixeira"},
+    {"day": "Wednesday", "hour": "11-13", "subject": "Software Engineering", "class": "LESI2", "classroom": "Room N", "teacher": "Joaquim Silva"},
+
+    {"day": "Thursday", "hour": "9-11", "subject": "Statistics", "class": "LESI2", "classroom": "Room E", "teacher": "Andreia Monteiro"},
+    {"day": "Thursday", "hour": "11-13", "subject": "Physics", "class": "LESI2", "classroom": "Room C", "teacher": "Daniel Miranda"},
+
+    {"day": "Friday", "hour": "9-11", "subject": "Software Engineering", "class": "LESI2", "classroom": "Room IOT", "teacher": "Joaquim Silva"},
+    {"day": "Friday", "hour": "11-13", "subject": "Object-Oriented Programming", "class": "LESI2", "classroom": "Room T", "teacher": "Luís Ferreira"},
+    {"day": "Friday", "hour": "14-16", "subject": "Data Storage", "class": "LESI2", "classroom": "Room E", "teacher": "Paulo Teixeira"},
+
+
+    #3ano
+    {"day": "Monday", "hour": "9-11", "subject": "Systems Integration", "class": "LESI3", "classroom": "Room Auditorium", "teacher": "Paulo Macedo"},
+    {"day": "Monday", "hour": "11-13", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room C", "teacher": "Joaquim Gonçalves"},
+    {"day": "Monday", "hour": "14-16", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite"},
+
+    {"day": "Tuesday", "hour": "9-11", "subject": "Embedded Systems", "class": "LESI3", "classroom": "Room Electronics", "teacher": "Paulo Macedo"},
+    {"day": "Tuesday", "hour": "11-13", "subject": "Mobile Programming", "class": "LESI3", "classroom": "Room C", "teacher": "Nuno Mendes"},
+
+    {"day": "Wednesday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room T", "teacher": "Patrícia Leite"},
+    {"day": "Wednesday", "hour": "11-13", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room C", "teacher": "Joaquim Gonçalves"},
+
+    {"day": "Thursday", "hour": "9-11", "subject": "Mobile Programming", "class": "LESI3", "classroom": "Room C", "teacher": "Nuno Mendes"},
+    {"day": "Thursday", "hour": "11-13", "subject": "Systems Integration", "class": "LESI3", "classroom": "Room Auditorium", "teacher": "Luís Ferreira"},
+    {"day": "Thursday", "hour": "14-16", "subject": "Embedded Systems", "class": "LESI3", "classroom": "Room Electronics", "teacher": "Paulo Macedo"}
+    ]
