@@ -1,4 +1,5 @@
 from copy import copy
+import time
 from data import *
 
 class AStar:
@@ -97,11 +98,17 @@ for action in actions:
             and action["teacher"] != state["teacher"] and action["classroom"] != state["classroom"]):
             modified_actions.append(action)
 
+#Initiates a count timer
+time_start=time.perf_counter()
+
 # Initialize the A* algorithm
 a_star = AStar(start_state, goal_states, modified_actions, heuristic_cost)
-
 # Find the optimal path to the goal state
 path = a_star.find_path()
 
+#time_end indicates the final time
+time_end=time.perf_counter()
 # Print the optimal path
 print(path)
+
+print("The heuristic sort take {} seconds".format(time_end-time_start))
