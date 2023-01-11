@@ -2,9 +2,9 @@ from copy import copy
 from data import *
 
 class AStar:
-    def __init__(self, start_state, goal_state, actions, heuristic_cost):
+    def __init__(self, start_state, goal_states, actions, heuristic_cost):
         self.start_state = start_state
-        self.goal_state = goal_state
+        self.goal_states = goal_states
         self.actions = actions
         self.heuristic_cost = heuristic_cost
 
@@ -16,18 +16,12 @@ class AStar:
             if key in new_state:
                 new_state[key] = action[key]
         return new_state
-
-    def is_goal_state(self, state):
-        if state in goal_states:
-            return True
-        return False
     
     def reconstruct_path(self, came_from, current_state):
-        path = []
-        path.append(current_state)
+        path = [dict(current_state)]
         while tuple(current_state.items()) in came_from:
             # Set the current state to its predecessor
-            #print(current_state, came_from)
+            print(current_state, came_from)
             current_state = came_from[tuple(current_state.items())]
             path.append(current_state)
         return path[::-1]
@@ -52,7 +46,7 @@ class AStar:
         # Find the state in the open set with the lowest f_score
             current_state = min(open_set, key=lambda s: f_score[tuple(s.items())])
             # If the current state is the goal state, return the path
-            if self.is_goal_state(current_state):
+            if dict(current_state) in self.goal_states:
                 return self.reconstruct_path(came_from, current_state)
             # Remove the current state from the open set and add it to the closed set
             open_set.remove(current_state)
@@ -62,11 +56,11 @@ class AStar:
             # For each action that can be taken from the current state
             for action in self.actions:
                 # Find the new state after taking the action
-                new_state = self.get_new_state(current_state, action)
+                new_state = self.get_new_state(dict(current_state), action)
                 # If the new state is in the closed set, skip it
-                if new_state in closed_set:
+                if tuple(new_state.items()) in closed_set:
                     continue
-            
+
                 # Calculate the cost to reach the new state
                 cost = g_score[tuple(current_state.items())] + action["cost"]                
                 # If the new state is not in the open set, or if the cost to reach the new state is lower than the previous cost, update the cost and came_from values
@@ -76,11 +70,12 @@ class AStar:
                     f_score[tuple(new_state.items())] = cost + self.heuristic_cost(new_state)
           
                 # If the new state is not in the open set, add it to the open set
-                if new_state not in open_set:
+                if tuple(new_state.items()) not in open_set:
                     open_set.append(new_state)
         return []
 # Define the function to calculate the heuristic cost (estimated cost to reach the goal state)
 def heuristic_cost(state):
+    min_cost = float("inf")
     for goal_state in goal_states:
         day_cost = abs(days_of_week.index(state["day"]) - days_of_week.index(goal_state["day"]))
         hour_cost = abs(hours.index(state["hour"]) - hours.index(goal_state["hour"]))
@@ -88,7 +83,9 @@ def heuristic_cost(state):
         class_cost = abs(classes.index(state["class"]) - classes.index(goal_state["class"]))
         teacher_cost = abs(teachers.index(state["teacher"]) - teachers.index(goal_state["teacher"]))
         classroom_cost = abs(classrooms.index(state["classroom"]) - classrooms.index(goal_state["classroom"]))
-    return day_cost + hour_cost + subject_cost + class_cost + teacher_cost + classroom_cost
+    total = day_cost + hour_cost + subject_cost + class_cost + teacher_cost + classroom_cost
+    min_cost = min(min_cost, total)
+    return min_cost
 
 
 states = []
@@ -96,7 +93,8 @@ states.append(start_state)
 modified_actions = []
 for action in actions:
     for state in states:
-        if (action["day"] != state["day"] or action["hour"] != state["hour"]) and action["teacher"] != state["teacher"]:
+        if (action["day"] != state["day"] or action["hour"] != state["hour"]
+            and action["teacher"] != state["teacher"] and action["classroom"] != state["classroom"]):
             modified_actions.append(action)
 
 # Initialize the A* algorithm
