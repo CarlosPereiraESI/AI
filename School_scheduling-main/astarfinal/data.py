@@ -13,8 +13,8 @@ classrooms = ["Room T", "Room E", "Room C", "Room N", "Room IOT",
 # Define the start and goal states as dictionaries
 start_state = {"day": "Monday", "hour": "9-11", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room T", "teacher": "Joaquim Gonçalves"}
 
-actions = [
 
+actions = [
 # -------------------------------------- Terceiro Ano ------------------------------------------------------------
 
 {"day": "Monday", "hour": "9-11", "subject": "Applied Project", "class": "LESI3", "classroom": "Room E", "teacher": "Patrícia Leite", "cost": 1},
