@@ -11,7 +11,8 @@ classrooms = ["Room T", "Room E", "Room C", "Room N", "Room IOT",
 "Room Networking", "Room Auditorium", "Room Automation", "Room Electronics"]
 
 # Define the start and goal states as dictionaries
-start_state = {"day": "Monday", "hour": "9-11", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room C", "teacher": "Joaquim Gonçalves"}
+start_state = {"day": "Monday", "hour": "9-11", "subject": "Artificial Inteligence", "class": "LESI3", "classroom": "Room T", "teacher": "Joaquim Gonçalves"}
+
 
 actions = [
 # -------------------------------------- Terceiro Ano ------------------------------------------------------------
